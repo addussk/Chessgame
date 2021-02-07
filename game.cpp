@@ -18,13 +18,6 @@ Game::~Game()
     delete ui;
 }
 
-void Game::addToWindow(QGraphicsItem *item){
-
-}
-
-void Game::removeFromWindow(QGraphicsItem *item){
-
-}
 
 void Game::on_playButton_clicked()
 {

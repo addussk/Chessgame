@@ -13,95 +13,89 @@ ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(
 // Pawn part
 Pawn::Pawn(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void Pawn::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/pawn1.png"));
+        setPixmap(QPixmap(":/resources/images/pawn1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/pawn.png"));
+        setPixmap(QPixmap(":/resources/images/pawn.png"));
     }
 }
 
 // Rook part
 Rook::Rook(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void Rook::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/rook1.png"));
+        setPixmap(QPixmap(":/resources/images/rook1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/rook.png"));
+        setPixmap(QPixmap(":/resources/images/rook.png"));
     }
 }
 
 // Knight part
 Knight::Knight(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void Knight::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/horse1.png"));
+        setPixmap(QPixmap(":/resources/images/horse1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/horse.png"));
+        setPixmap(QPixmap(":/resources/images/horse.png"));
     }
 }
 
 // Bishop part
 Bishop::Bishop(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void Bishop::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/bishop1.png"));
+        setPixmap(QPixmap(":/resources/images/bishop1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/bishop.png"));
+        setPixmap(QPixmap(":/resources/images/bishop.png"));
     }
 }
 
 // Queen part
 Queen::Queen(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void Queen::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/queen1.png"));
+        setPixmap(QPixmap(":/resources/images/queen1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/queen.png"));
+        setPixmap(QPixmap(":/resources/images/queen.png"));
     }
 }
 
 // King part
 King::King(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
-    // spr czy mozna usunac
     firstMove = true;
 }
 
 void King::setImage(){
 
     if(ChessPiece::side == "white"){
-        setPixmap(QPixmap("F:/Chess-master/king1.png"));
+        setPixmap(QPixmap(":/resources/images/king1.png"));
     }else{
-        setPixmap(QPixmap("F:/Chess-master/king.png"));
+        setPixmap(QPixmap(":/resources/images/king.png"));
     }
 }
