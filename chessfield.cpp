@@ -21,8 +21,24 @@ ChessField :: ~ChessField(){
     delete this;
 }
 
+void ChessField::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->scenePos();
+    qDebug() << this->colLoc << " row: " << this->rowLoc ;
+
+    return;
+}
 
 void ChessField :: setColor(QColor color){
     brush.setColor(color);
     setBrush(color);
+}
+
+void ChessField::placePiece(ChessPiece* piece, int lenEdge){
+    qDebug() << x()<< " " << piece->pixmap().height();
+    piece->setPos(x()+ (lenEdge/2)-piece->pixmap().width()/2, y()+(lenEdge/2)-piece->pixmap().height()/2);
+    piece->setCurrentBox(this);
+//    setHasChessPiece @wymaga implementacji
+    currentPiece = piece;
+
 }

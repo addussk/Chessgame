@@ -85,41 +85,26 @@ void chessboard::placeOnBoard(){
 
     setUpPieces("white");
     setUpPieces("black");
-    int tmpIter = 0;
+    int whiteIter = 0;
+    int blackIter = 0;
 
-    for (qsizetype i = 0; i < white.size(); ++i){
+    for(int i = 0; i<8; i++){
+        for(int j=0; j<8; j++){
 
+            ChessField* field = collection[i][j];
+            if(i<2){
+                field->placePiece(black[blackIter], this->sizeField);
+                alivePiece.append(black[blackIter]);
+                boardScene->addItem(black[blackIter++]);
+            }
 
-        ChessPiece* ptrWhite = white.at(i);
-        if( tmpIter<8 ){
-            ptrWhite->setPos(sizeField*tmpIter, sizeField);
-        }else if (tmpIter<16){
-            ptrWhite->setPos(sizeField*(tmpIter-8), 0);
-        }else{
-            //error, throw exception
+            if(i>5){
+                field->placePiece(white[whiteIter], this->sizeField);
+                alivePiece.append(white[whiteIter]);
+                boardScene->addItem(white[whiteIter++]);
+            }
         }
-
-        boardScene->addItem(ptrWhite);
-        tmpIter+=1;
     }
-
-    tmpIter = 0;
-
-    for (qsizetype i = 0; i < black.size(); ++i){
-
-        ChessPiece* ptrBlack = black.at(i);
-        if( tmpIter<8 ){
-            ptrBlack->setPos(sizeField*tmpIter, 6*sizeField);
-        } else if(tmpIter<16){
-            ptrBlack->setPos(sizeField*(tmpIter-8), 7*sizeField);
-        }else{
-            //error, throw exception
-        }
-
-        boardScene->addItem(ptrBlack);
-        tmpIter+=1;
-    }
-
 }
 
 void chessboard::drawBoard(int edgeLen){
@@ -129,7 +114,7 @@ void chessboard::drawBoard(int edgeLen){
         for (int c=0; c<8; c++) {
             // Stworzenie pojedynczego pola na szachownicy
             ChessField *field = new ChessField(NULL, edgeLen);
-            coordinates[r][c] = field;
+            collection[r][c] = field;
 
             //Ustawienie pozycji kazdego pola
             field->rowLoc = r;

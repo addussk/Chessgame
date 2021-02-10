@@ -3,16 +3,25 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsSceneMouseEvent>
+#include "chessfield.h"
 
+class ChessField;
 class ChessPiece: public QGraphicsPixmapItem{
 public:
     ChessPiece(QString team="", QGraphicsItem* parent = 0);
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    // odczytujemy kolor bierki
+    QString getSide();
+    void setCurrentBox(ChessField* field);
+    ChessField* getCurrentBox();
 
 
 protected:
     QString side;
     bool isPaced;
     bool firstMove;
+    ChessField* currentBox;
 };
 
 

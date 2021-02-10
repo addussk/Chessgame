@@ -3,7 +3,10 @@
 
 #include <QBrush>
 #include <QGraphicsRectItem>
+#include <QGraphicsSceneMouseEvent>
+#include "chesspiece.h"
 
+class ChessPiece;
 class ChessField :public QGraphicsRectItem
 {
 
@@ -15,8 +18,14 @@ public:
     //desctructor
     ~ChessField();
 
+    //public function
+    // ustawia pole na kolor value
     void setColor(QColor value);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void placePiece(ChessPiece* piece, int lenEdge);
 
+    ChessPiece* currentPiece;
+    // koordynaty pola na szachownicy
     int rowLoc;
     int colLoc;
 

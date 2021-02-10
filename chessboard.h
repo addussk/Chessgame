@@ -33,7 +33,9 @@ protected:
     int sizeField;
 
     //coordinates
-    ChessField *coordinates[8][8];
+    ChessField *collection[8][8];
+    // lista z pionkami majace zycia
+    QList <ChessPiece *> alivePiece;
 
 private:
     Ui::chessboard *ui;

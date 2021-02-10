@@ -8,6 +8,24 @@ ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(
     firstMove = true;
 }
 
+void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->scenePos();
+    qDebug() << this->getSide();
+    return;
+}
+
+void ChessPiece::setCurrentBox(ChessField* field){
+    currentBox = field;
+}
+
+ChessField* ChessPiece::getCurrentBox(){
+    return currentBox;
+}
+
+QString ChessPiece::getSide(){
+    return side;
+}
 
 
 // Pawn part
