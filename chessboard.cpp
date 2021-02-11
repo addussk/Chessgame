@@ -85,23 +85,25 @@ void chessboard::placeOnBoard(){
 
     setUpPieces("white");
     setUpPieces("black");
-    int whiteIter = 0;
-    int blackIter = 15;
+    pieceToMove = NULL;
+
+    int tmp_whiteIter = 0;
+    int tmp_blackIter = 15;
 
     for(int i = 0; i<8; i++){
         for(int j=0; j<8; j++){
 
             ChessField* field = collection[i][j];
             if(i<2){
-                field->placePiece(black[blackIter], this->sizeField);
-                alivePiece.append(black[blackIter]);
-                boardScene->addItem(black[blackIter--]);
+                field->placePiece(black[tmp_blackIter], this->sizeField);
+                alivePiece.append(black[tmp_blackIter]);
+                boardScene->addItem(black[tmp_blackIter--]);
             }
 
             if(i>5){
-                field->placePiece(white[whiteIter], this->sizeField);
-                alivePiece.append(white[whiteIter]);
-                boardScene->addItem(white[whiteIter++]);
+                field->placePiece(white[tmp_whiteIter], this->sizeField);
+                alivePiece.append(white[tmp_whiteIter]);
+                boardScene->addItem(white[tmp_whiteIter++]);
             }
         }
     }
