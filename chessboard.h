@@ -28,25 +28,26 @@ public:
     void drawBoard(int);
     void setUpPieces(QString team);
     void placeOnBoard();
+    void checkForCheck();
 
-protected:
-    // dlugosc krawedzi pola na szachownicy
-    int sizeField;
-
-    //coordinates
-    ChessField *collection[8][8];
     // lista z pionkami majace zycia
-    QList <ChessPiece *> alivePiece;
+    QList <ChessPiece*> alivePiece;
     // wskaznik na pionek ktory zostal zaznaczony
     ChessPiece* pieceToMove;
+
+protected:
+    //coordinates
+    ChessField *collection[8][8];
 
 private:
     Ui::chessboard *ui;
     QGraphicsScene *boardScene;
     int widthWindow;
     int hightWindow;
-    QList <ChessPiece *> white;
-    QList <ChessPiece *> black;
+    QList <ChessPiece*> white;
+    QList <ChessPiece*> black;
+    // dlugosc krawedzi pola na szachownicy
+    int sizeField;
 };
 
 #endif // CHESSBOARD_H

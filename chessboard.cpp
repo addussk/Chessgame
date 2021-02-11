@@ -20,7 +20,7 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
 
     // Narysowanie pol na szachownicy
     drawBoard(edgeLen);
-
+    
     placeOnBoard();
 
 
@@ -85,8 +85,8 @@ void chessboard::placeOnBoard(){
 
     setUpPieces("white");
     setUpPieces("black");
-    pieceToMove = NULL;
-
+    this->pieceToMove = NULL;
+    
     int tmp_whiteIter = 0;
     int tmp_blackIter = 15;
 

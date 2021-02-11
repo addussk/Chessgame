@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include "chessboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Game; }
@@ -17,6 +18,8 @@ class Game : public QMainWindow
 public:
     Game(QWidget *parent = nullptr);
     ~Game();
+
+    chessboard* chessboardPtr;
 
 private slots:
     void on_playButton_clicked();

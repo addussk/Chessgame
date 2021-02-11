@@ -17,10 +17,8 @@ Game::~Game()
 
 void Game::on_playButton_clicked()
 {
-    chessboard *chessBoardPtr = new chessboard(NULL,1400,1000,80);
-    chessBoardPtr->show();
-
-
+    this->chessboardPtr = new chessboard(NULL,1400,1000,80);
+    chessboardPtr->show();
     //set up pawns
     //show menu
 
