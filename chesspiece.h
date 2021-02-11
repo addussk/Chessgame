@@ -19,15 +19,20 @@ public:
     void setCurrentBox(ChessField* field);
     // Otrzymujemy wskaznik na pole na ktorym jest bierka
     ChessField* getCurrentBox();
-
+    // funkcja odpowiedzialna za ruch pionem
     virtual void moves();
-
+    //zmienic nazwe
+    bool fieldSetting(ChessField* field);
+    //
+    void decolor();
+    QList<ChessField*> moveLocation();
 
 protected:
     QString side;
     bool isPaced;
     bool firstMove;
     ChessField* currentBox;
+    QList <ChessField*> location;
 };
 
 

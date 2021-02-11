@@ -1,5 +1,8 @@
 #include "chesspiece.h"
 #include <QDebug>
+#include "game.h"
+
+extern Game* game;
 
 ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(parent)
 {
@@ -10,11 +13,26 @@ ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(
 
 void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug()<< "jestem ";
+    //Deselect mode
+    if(this == game->chessboardPtr->pieceToMove){
+        game->chessboardPtr->pieceToMove->decolor();
+        game->chessboardPtr->pieceToMove->getCurrentBox()->resetOrginalColor();
+        game->chessboardPtr->pieceToMove = NULL;
+        return;
+    }
 
-    this->currentBox->setColor(Qt::yellow);
-    qDebug() << "jestem";
-    this->moves();
-    return;
+    //Gdy gracz wybiera piona ktorym chce ruszyc.
+    ChessPiece* tmpPtr = game->chessboardPtr->pieceToMove;
+    if(tmpPtr == NULL){
+        //Przypisz wybrany pionek jako gotowy do ruchu
+        game->chessboardPtr->pieceToMove = this;
+        //Zmieniamy kolor pola na ktorym stoi wybrany pion
+        game->chessboardPtr->pieceToMove->getCurrentBox()->setColor(Qt::darkBlue);
+        // pokaz mozliwe pola
+        game->chessboardPtr->pieceToMove->moves();
+    }
+
 }
 
 void ChessPiece::setCurrentBox(ChessField* field){
@@ -33,11 +51,39 @@ QString ChessPiece::getSide(){
     return side;
 }
 
+QList<ChessField*> ChessPiece::moveLocation(){
+    return location;
+}
+
+void ChessPiece::decolor(){
+    for(size_t i=0, n=location.size(); i<n; i++){
+        location[i]->resetOrginalColor();
+    }
+}
+
+//zmienic nazwe
+bool ChessPiece::fieldSetting(ChessField *field){
+
+    if(field->getHasChessPiece()){
+
+        King* ptr = dynamic_cast<King*>(location.last()->currentPiece);
+
+        if(ptr){
+            field->setColor(Qt::blue);
+        }else{
+            field->setColor(Qt::red);
+        }
+        return true;
+
+    }else{
+        location.last()->setColor(Qt::darkBlue);
+    }
+    return false;
+}
+
 void ChessPiece::moves(){
     qDebug() << "Move function in ChessPiece ";
 }
-
-
 
 // Pawn part
 Pawn::Pawn(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
@@ -55,11 +101,20 @@ void Pawn::setImage(){
 }
 
 void Pawn::moves(){
+
+    location.clear();
+
     int row = this->getCurrentBox()->rowLoc;
     int col = this->getCurrentBox()->colLoc;
 
-    qDebug() << row << col;
-    qDebug() << "Move function in Pawn ";
+
+    if(this->getSide() == "white"){
+        qDebug() << "White Pawn is moving ";
+//        if( row >0 && )
+
+    }else{
+        qDebug() << "Black Pawn is moving ";
+    }
 
 
 }
