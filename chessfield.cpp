@@ -23,14 +23,11 @@ ChessField :: ~ChessField(){
 
 void ChessField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-//    event->scenePos();
-//    qDebug() << this->colLoc << " row: " << this->rowLoc;
+    // Jesli gracz wskazal pole na ktorym znajduje sie figura ktora zamierza ruszyc
+    if(this->getHasChessPiece()){
+        this->currentPiece->mousePressEvent(event);
+    }
 
-//    if(currentPiece){
-//        currentPiece->moves();
-//    }
-
-    return;
 }
 
 void ChessField :: setColor(QColor color){
@@ -62,6 +59,10 @@ void ChessField::setHasChessPiece(bool value, ChessPiece *piece){
     }else{
         setColorOfPiece("NONE");
     }
+}
+
+bool ChessField::getHasChessPiece(){
+    return hasChessPiece;
 }
 
 void ChessField::placePiece(ChessPiece* piece, int lenEdge){
