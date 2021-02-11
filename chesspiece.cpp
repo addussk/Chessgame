@@ -10,8 +10,10 @@ ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(
 
 void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    event->scenePos();
-    qDebug() << this->getSide();
+
+    this->currentBox->setColor(Qt::yellow);
+    qDebug() << "jestem";
+    this->moves();
     return;
 }
 
@@ -23,9 +25,18 @@ ChessField* ChessPiece::getCurrentBox(){
     return currentBox;
 }
 
+void ChessPiece::setSide(QString val){
+    side = val;
+}
+
 QString ChessPiece::getSide(){
     return side;
 }
+
+void ChessPiece::moves(){
+    qDebug() << "Move function in ChessPiece ";
+}
+
 
 
 // Pawn part
@@ -43,6 +54,16 @@ void Pawn::setImage(){
     }
 }
 
+void Pawn::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in Pawn ";
+
+
+}
+
 // Rook part
 Rook::Rook(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
@@ -56,6 +77,16 @@ void Rook::setImage(){
     }else{
         setPixmap(QPixmap(":/resources/images/rook.png"));
     }
+}
+
+void Rook::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in Rook ";
+
+
 }
 
 // Knight part
@@ -73,6 +104,16 @@ void Knight::setImage(){
     }
 }
 
+void Knight::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in Knight";
+
+
+}
+
 // Bishop part
 Bishop::Bishop(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
@@ -86,6 +127,16 @@ void Bishop::setImage(){
     }else{
         setPixmap(QPixmap(":/resources/images/bishop.png"));
     }
+}
+
+void Bishop::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in Bishop";
+
+
 }
 
 // Queen part
@@ -103,6 +154,16 @@ void Queen::setImage(){
     }
 }
 
+void Queen::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in Queen ";
+
+
+}
+
 // King part
 King::King(QString team, QGraphicsItem* parent):ChessPiece(team,parent){
     setImage();
@@ -116,4 +177,14 @@ void King::setImage(){
     }else{
         setPixmap(QPixmap(":/resources/images/king.png"));
     }
+}
+
+void King::moves(){
+    int row = this->getCurrentBox()->rowLoc;
+    int col = this->getCurrentBox()->colLoc;
+
+    qDebug() << row << col;
+    qDebug() << "Move function in King ";
+
+
 }

@@ -13,8 +13,14 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     // odczytujemy kolor bierki
     QString getSide();
+    // ustawiamy kolor bierki
+    void setSide(QString);
+    // ustawiamy do bierki pole na ktorym aktualnie sie znajduje
     void setCurrentBox(ChessField* field);
+    // Otrzymujemy wskaznik na pole na ktorym jest bierka
     ChessField* getCurrentBox();
+
+    virtual void moves();
 
 
 protected:
@@ -30,7 +36,7 @@ class Pawn:public ChessPiece
 public:
     Pawn(QString team,QGraphicsItem *parent = 0);
     void setImage();
-    void moves();
+    virtual void moves();
 
  private:
 
