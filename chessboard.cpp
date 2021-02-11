@@ -110,8 +110,8 @@ void chessboard::placeOnBoard(){
 void chessboard::drawBoard(int edgeLen){
     // Tworzenie szachownicy
     int SHIFT = this->sizeField;
-    for(int r=0; r<8; r++){
-        for (int c=0; c<8; c++) {
+    for(int c=0; c<8; c++){
+        for (int r=0; r<8; r++) {
             // Stworzenie pojedynczego pola na szachownicy
             ChessField *field = new ChessField(NULL, edgeLen);
             collection[r][c] = field;
@@ -119,7 +119,7 @@ void chessboard::drawBoard(int edgeLen){
             //Ustawienie pozycji kazdego pola
             field->rowLoc = r;
             field->colLoc = c;
-            field->setPos(SHIFT*r,SHIFT*c);
+            field->setPos(SHIFT*c,SHIFT*r);
 
             if( (c+r)%2 == 0 ){
                 field->setOrginalColor(Qt::lightGray);
