@@ -1,5 +1,6 @@
-#include "chessfield.h"
 #include <QDebug>
+#include "chessfield.h"
+#include "chesspiece.h"
 
 // constructor
 ChessField :: ChessField(QGraphicsItem *parent, int sizeField) : QGraphicsRectItem(parent){
@@ -66,10 +67,19 @@ bool ChessField::getHasChessPiece(){
 }
 
 void ChessField::placePiece(ChessPiece* piece, int lenEdge){
-    qDebug() << x()<< " " << piece->pixmap().height();
     piece->setPos(x()+ (lenEdge/2)-piece->pixmap().width()/2, y()+(lenEdge/2)-piece->pixmap().height()/2);
     piece->setCurrentBox(this);
     setHasChessPiece(true, piece);
     currentPiece = piece;
 
+}
+
+void ChessField::checkForCheck(){
+//    int tmp =0;
+//    QList <ChessPiece*> pList = game->chessboardPtr->alivePiece;
+
+//    for(size_t i=0; i<pList.size(); i++){
+
+
+//    }
 }

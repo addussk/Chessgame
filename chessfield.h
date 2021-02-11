@@ -30,6 +30,8 @@ public:
     QString getColorOfPiece();
     void setHasChessPiece(bool value, ChessPiece* piece = 0);
     bool getHasChessPiece();
+    //
+    void checkForCheck();
 
     // Pionek znajdujacy sie na polu
     ChessPiece* currentPiece;
