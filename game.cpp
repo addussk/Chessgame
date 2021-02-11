@@ -1,7 +1,5 @@
 #include "game.h"
 #include "ui_game.h"
-#include "chessfield.h"
-#include "chessboard.h"
 #include <QDebug>
 
 Game::Game(QWidget *parent)
@@ -9,8 +7,6 @@ Game::Game(QWidget *parent)
     , ui(new Ui::Game)
 {
     ui->setupUi(this);
-
-
 }
 
 Game::~Game()
@@ -21,9 +17,7 @@ Game::~Game()
 
 void Game::on_playButton_clicked()
 {
-
-    chessboard *chessBoardPtr = new chessboard(NULL,1920,1080,80);
-
+    chessboard *chessBoardPtr = new chessboard(NULL,1400,1000,80);
     chessBoardPtr->show();
 
 
