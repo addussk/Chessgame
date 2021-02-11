@@ -30,12 +30,15 @@ public:
     void placeOnBoard();
 
 protected:
+    // dlugosc krawedzi pola na szachownicy
     int sizeField;
 
     //coordinates
     ChessField *collection[8][8];
     // lista z pionkami majace zycia
     QList <ChessPiece *> alivePiece;
+    // wskaznik na pionek ktory zostal zaznaczony
+    ChessPiece* pieceToMove;
 
 private:
     Ui::chessboard *ui;
