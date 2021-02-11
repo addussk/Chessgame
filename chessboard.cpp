@@ -86,7 +86,7 @@ void chessboard::placeOnBoard(){
     setUpPieces("white");
     setUpPieces("black");
     int whiteIter = 0;
-    int blackIter = 0;
+    int blackIter = 15;
 
     for(int i = 0; i<8; i++){
         for(int j=0; j<8; j++){
@@ -95,7 +95,7 @@ void chessboard::placeOnBoard(){
             if(i<2){
                 field->placePiece(black[blackIter], this->sizeField);
                 alivePiece.append(black[blackIter]);
-                boardScene->addItem(black[blackIter++]);
+                boardScene->addItem(black[blackIter--]);
             }
 
             if(i>5){
@@ -122,10 +122,10 @@ void chessboard::drawBoard(int edgeLen){
             field->setPos(SHIFT*r,SHIFT*c);
 
             if( (c+r)%2 == 0 ){
-                field->setColor(Qt::lightGray);
+                field->setOrginalColor(Qt::lightGray);
             }
             else{
-                field->setColor(Qt::darkRed);
+                field->setOrginalColor(Qt::darkRed);
             }
 
             // Umiesc pole w view
