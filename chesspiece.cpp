@@ -107,13 +107,51 @@ void Pawn::moves(){
     int row = this->getCurrentBox()->rowLoc;
     int col = this->getCurrentBox()->colLoc;
 
+    qDebug() << row << col;
 
     if(this->getSide() == "white"){
         qDebug() << "White Pawn is moving ";
-//        if( row >0 && )
+        //Ruch do przodu bialym pionem
+        if( row >0 && (!game->chessboardPtr->collection[row-1][col]->getHasChessPiece())){
+            location.append(game->chessboardPtr->collection[row-1][col]);
+            fieldSetting(location.last());
+            // Jesli pionek ma pierwszy ruch, moze ruszyc sie o 2 pole, gdy nie ma nic przed nim
+            if(this->firstMove && (!game->chessboardPtr->collection[row-2][col]->getHasChessPiece())){
+                location.append(game->chessboardPtr->collection[row-2][col]);
+                fieldSetting(location.last());
+            }
+        }
+        // Zbicia pionem na lewo i prawo
+        if(col > 0 && row>0 && game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == "Black"){
+            location.append(game->chessboardPtr->collection[row-1][col-1]);
+            fieldSetting(location.last());
+        }
+        if(col <7  && row>0 && game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == "Black"){
+            location.append(game->chessboardPtr->collection[row-1][col+1]);
+            fieldSetting(location.last());
+        }
 
     }else{
         qDebug() << "Black Pawn is moving ";
+        //Ruch do przodu czarnym pionem
+        if( row <7 && (!game->chessboardPtr->collection[row+1][col]->getHasChessPiece())){
+            location.append(game->chessboardPtr->collection[row+1][col]);
+            fieldSetting(location.last());
+            // Jesli pionek ma pierwszy ruch, moze ruszyc sie o 2 pole, gdy nie ma nic przed nim
+            if(this->firstMove && (!game->chessboardPtr->collection[row+2][col]->getHasChessPiece())){
+                location.append(game->chessboardPtr->collection[row+2][col]);
+                fieldSetting(location.last());
+            }
+        }
+        // Zbicia pionem na lewo i prawo
+        if(col > 0 && row<7 && game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == "Black"){
+            location.append(game->chessboardPtr->collection[row+1][col-1]);
+            fieldSetting(location.last());
+        }
+        if(col <7  && row<7 && game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == "Black"){
+            location.append(game->chessboardPtr->collection[row+1][col+1]);
+            fieldSetting(location.last());
+        }
     }
 
 
