@@ -81,11 +81,25 @@ void chessboard::setUpPieces(QString team){
 
 }
 
+void chessboard::setTurn(QString team){
+    turn = team;
+}
+
+QString chessboard::getTurn(){
+    return turn;
+}
+
+void chessboard::changeTurn(){
+    turn = turn == "white" ? "black" : "white";
+}
+
 void chessboard::placeOnBoard(){
 
     setUpPieces("white");
     setUpPieces("black");
     this->pieceToMove = NULL;
+    // Rozpoczyna gracz bialymi
+    this->setTurn("white");
     
     int tmp_whiteIter = 0;
     int tmp_blackIter = 15;

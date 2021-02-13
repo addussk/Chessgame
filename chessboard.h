@@ -30,6 +30,10 @@ public:
     void placeOnBoard();
     void checkForCheck();
 
+    QString getTurn();
+    void setTurn(QString);
+    void changeTurn();
+
     // lista z pionkami majace zycia
     QList <ChessPiece*> alivePiece;
     // wskaznik na pionek ktory zostal zaznaczony
@@ -46,6 +50,8 @@ private:
     QList <ChessPiece*> black;
     // dlugosc krawedzi pola na szachownicy
     int sizeField;
+    // Wskazuje na kolor ktorego jest kolej
+    QString turn;
 };
 
 #endif // CHESSBOARD_H

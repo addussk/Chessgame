@@ -13,7 +13,11 @@ ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(
 
 void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug()<< "jestem ";
+    qDebug()<< "ChessPiece::mousePressEvent ";
+    if(game->chessboardPtr->getTurn() != this->side){
+        qDebug()<< "ChessPiece::mousePressEvent: Nie twoja kolej, rusza przeciwnik!";
+        return;
+    }
     //Deselect mode
     if(this == game->chessboardPtr->pieceToMove){
         game->chessboardPtr->pieceToMove->decolor();
@@ -23,8 +27,8 @@ void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 
     //Gdy gracz wybiera piona ktorym chce ruszyc.
-    ChessPiece* tmpPtr = game->chessboardPtr->pieceToMove;
-    if(tmpPtr == NULL){
+
+    if(NULL == game->chessboardPtr->pieceToMove){
         //Przypisz wybrany pionek jako gotowy do ruchu
         game->chessboardPtr->pieceToMove = this;
         //Zmieniamy kolor pola na ktorym stoi wybrany pion
