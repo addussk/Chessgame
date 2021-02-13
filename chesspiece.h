@@ -27,10 +27,13 @@ public:
     void decolor();
     QList<ChessField*> moveLocation();
     bool firstMove;
+    //
+    void setIsPlaced(bool value);
+    bool getIsPlaced();
 
 protected:
     QString side;
-    bool isPaced;
+    bool isPlaced;
     ChessField* currentBox;
     QList <ChessField*> location;
 };

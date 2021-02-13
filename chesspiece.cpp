@@ -7,34 +7,42 @@ extern Game* game;
 ChessPiece::ChessPiece(QString team, QGraphicsItem* parent):QGraphicsPixmapItem(parent)
 {
     side = team;
-    isPaced = true;
+    isPlaced = true;
     firstMove = true;
 }
 
 void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     qDebug()<< "ChessPiece::mousePressEvent ";
-    if(game->chessboardPtr->getTurn() != this->side){
-        qDebug()<< "ChessPiece::mousePressEvent: Nie twoja kolej, rusza przeciwnik!";
-        return;
-    }
     //Deselect mode
     if(this == game->chessboardPtr->pieceToMove){
+        qDebug()<< "ChessPiece::mousePressEvent: Deselect!";
         game->chessboardPtr->pieceToMove->decolor();
         game->chessboardPtr->pieceToMove->getCurrentBox()->resetOrginalColor();
         game->chessboardPtr->pieceToMove = NULL;
         return;
     }
 
-    //Gdy gracz wybiera piona ktorym chce ruszyc.
+    // Pomijamy ruch gdy gracz probuje wybrac piona koloru ktoremu nie przypada ruch lub gdy wybiera puste pole
+    if( !this->getIsPlaced() || ((game->chessboardPtr->getTurn() != this->side) && (!game->chessboardPtr->pieceToMove)) ){
+        qDebug()<< "ChessPiece::mousePressEvent: Nie twoja kolej, rusza przeciwnik!";
+        return;
+    }
 
+    //Gdy gracz wybiera piona ktorym chce ruszyc.
     if(NULL == game->chessboardPtr->pieceToMove){
+        qDebug()<< "ChessPiece::mousePressEvent Pionek zostal wybrany ";
         //Przypisz wybrany pionek jako gotowy do ruchu
         game->chessboardPtr->pieceToMove = this;
         //Zmieniamy kolor pola na ktorym stoi wybrany pion
         game->chessboardPtr->pieceToMove->getCurrentBox()->setColor(Qt::darkBlue);
         // pokaz mozliwe pola
         game->chessboardPtr->pieceToMove->moves();
+    }
+    // Gdy pion ktorym ruszamy jest wybrany, nastepnie wykonujemy zbicie piona przeciwnego koloru
+    else if(this->getSide() != game->chessboardPtr->pieceToMove->getSide()){
+        qDebug()<< "ChessPiece::mousePressEvent Nastepuje bicie";
+        this->getCurrentBox()->mousePressEvent(event);
     }
 
 }
@@ -87,6 +95,14 @@ bool ChessPiece::fieldSetting(ChessField *field){
 
 void ChessPiece::moves(){
     qDebug() << "Move function in ChessPiece ";
+}
+
+void ChessPiece::setIsPlaced(bool value){
+    isPlaced = value;
+}
+
+bool ChessPiece::getIsPlaced(){
+    return isPlaced;
 }
 
 // Pawn part
