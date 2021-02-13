@@ -27,12 +27,18 @@ ChessField :: ~ChessField(){
 void ChessField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     qDebug()<< "ChessField::mousePressEvent ";
+    // Gdy gracz klika drugi raz na tego samego piona
+    if((this->currentPiece == game->chessboardPtr->pieceToMove) && this->currentPiece){
+        currentPiece->mousePressEvent(event);
+        return;
+    }
     //Jesli gracz wybral pionka ktorym chce ruszyc
     if(game->chessboardPtr->pieceToMove){
         // W przypadku gdy wybierzemy pionka z naszej druzyny
         if(this->chessPieceColor == game->chessboardPtr->pieceToMove->getSide()){
             return;
         }
+
         // reset pola na ktorym stoi pion
         game->chessboardPtr->pieceToMove->decolor();
         // dotyczy tylko pionkow
@@ -41,17 +47,17 @@ void ChessField::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(this->getHasChessPiece()){
             this->currentPiece->setCurrentBox(NULL);
         }
+
         game->chessboardPtr->pieceToMove->getCurrentBox()->setHasChessPiece(false);
         game->chessboardPtr->pieceToMove->getCurrentBox()->currentPiece = NULL;
         game->chessboardPtr->pieceToMove->getCurrentBox()->resetOrginalColor();
         placePiece(game->chessboardPtr->pieceToMove, 80);
         game->chessboardPtr->pieceToMove = NULL;
         game->chessboardPtr->changeTurn();
-
     }
 
     // Jesli gracz wskazal pole na ktorym znajduje sie figura ktora zamierza ruszyc
-    if(this->getHasChessPiece()){
+    else if(this->getHasChessPiece()){
         this->currentPiece->mousePressEvent(event);
     }
 
