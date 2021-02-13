@@ -1,7 +1,9 @@
 #include <QDebug>
 #include "chessfield.h"
 #include "chesspiece.h"
+#include "game.h"
 
+extern Game* game;
 // constructor
 ChessField :: ChessField(QGraphicsItem *parent, int sizeField) : QGraphicsRectItem(parent){
     int edge = sizeField;
@@ -27,6 +29,26 @@ void ChessField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     // Jesli gracz wskazal pole na ktorym znajduje sie figura ktora zamierza ruszyc
     if(this->getHasChessPiece()){
         this->currentPiece->mousePressEvent(event);
+    }
+    //Jesli gracz wybral pionka ktorym chce ruszyc
+    if(game->chessboardPtr->pieceToMove){
+        // W przypadku gdy wybierzemy pionka z naszej druzyny
+        if(this->chessPieceColor == game->chessboardPtr->pieceToMove->getSide()){
+            return;
+        }
+        // reset pola na ktorym stoi pion
+        game->chessboardPtr->pieceToMove->decolor();
+        // dotyczy tylko pionkow
+        game->chessboardPtr->pieceToMove->firstMove=false;
+
+        if(this->getHasChessPiece()){
+            this->currentPiece->setCurrentBox(NULL);
+        }
+        game->chessboardPtr->pieceToMove->getCurrentBox()->setHasChessPiece(false);
+        game->chessboardPtr->pieceToMove->getCurrentBox()->currentPiece = NULL;
+        game->chessboardPtr->pieceToMove->getCurrentBox()->resetOrginalColor();
+        placePiece(game->chessboardPtr->pieceToMove, 80);
+
     }
 
 }
