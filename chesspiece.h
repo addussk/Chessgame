@@ -26,11 +26,11 @@ public:
     //
     void decolor();
     QList<ChessField*> moveLocation();
+    bool firstMove;
 
 protected:
     QString side;
     bool isPaced;
-    bool firstMove;
     ChessField* currentBox;
     QList <ChessField*> location;
 };

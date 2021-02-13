@@ -116,7 +116,7 @@ void chessboard::drawBoard(int edgeLen){
         for (int r=0; r<8; r++) {
             // Stworzenie pojedynczego pola na szachownicy
             ChessField *field = new ChessField(NULL, edgeLen);
-            collection[r][c] = field;
+            this->collection[r][c] = field;
 
             //Ustawienie pozycji kazdego pola
             field->rowLoc = r;

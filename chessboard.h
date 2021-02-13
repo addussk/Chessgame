@@ -34,8 +34,6 @@ public:
     QList <ChessPiece*> alivePiece;
     // wskaznik na pionek ktory zostal zaznaczony
     ChessPiece* pieceToMove;
-
-protected:
     //coordinates
     ChessField *collection[8][8];
 
