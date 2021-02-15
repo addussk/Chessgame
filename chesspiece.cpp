@@ -193,11 +193,72 @@ void Rook::setImage(){
 }
 
 void Rook::moves(){
+    qDebug() << "Move function in Rook ";
+
+    location.clear();
+
     int row = this->getCurrentBox()->rowLoc;
     int col = this->getCurrentBox()->colLoc;
+    QString team = this->getSide();
 
     qDebug() << row << col;
-    qDebug() << "Move function in Rook ";
+
+    // Ruch do przodu
+    for(int i = row-1,j = col; i >= 0 ; i--) {
+       if(game->chessboardPtr->collection[i][j]->getColorOfPiece() == team ) {
+           break;
+       }
+       else
+       {
+           location.append(game->chessboardPtr->collection[i][j]);
+           if(fieldSetting(location.last()))
+               break;
+        }
+    }
+
+    // Ruch w dol
+    for(int i = row+1,j = col; i <= 7 ; i++) {
+        if(game->chessboardPtr->collection[i][j]->getColorOfPiece() == team ) {
+            break;
+        }
+        else
+        {
+            location.append(game->chessboardPtr->collection[i][j]);
+            if(fieldSetting(location.last())){
+                break;
+            }
+        }
+    }
+
+    // Ruch w prawo
+    for(int i = row,j = col+1; j <= 7 ; j++)
+    {
+        if(game->chessboardPtr->collection[i][j]->getColorOfPiece() == team ) {
+          break;
+        }
+        else
+        {
+          location.append(game->chessboardPtr->collection[i][j]);
+          if(fieldSetting(location.last()))
+              break;
+        }
+
+   }
+
+    // Ruch w lewo
+    for(int i = row,j = col-1; j >= 0 ; j--) {
+        if(game->chessboardPtr->collection[i][j]->getColorOfPiece() == team ) {
+         break;
+        }
+        else
+        {
+         location.append(game->chessboardPtr->collection[i][j]);
+         if(fieldSetting(location.last()))
+            break;
+        }
+    }
+
+
 
 
 }
