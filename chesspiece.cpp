@@ -143,11 +143,11 @@ void Pawn::moves(){
             }
         }
         // Zbicia pionem na lewo i prawo
-        if(col > 0 && row>0 && game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == "Black"){
+        if( col > 0 && row>0 && game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == "black" ){
             location.append(game->chessboardPtr->collection[row-1][col-1]);
             fieldSetting(location.last());
         }
-        if(col <7  && row>0 && game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == "Black"){
+        if( col <7  && row>0 && game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == "black" ){
             location.append(game->chessboardPtr->collection[row-1][col+1]);
             fieldSetting(location.last());
         }
@@ -165,11 +165,11 @@ void Pawn::moves(){
             }
         }
         // Zbicia pionem na lewo i prawo
-        if(col > 0 && row<7 && game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == "Black"){
+        if(col > 0 && row<7 && game->chessboardPtr->collection[row+1][col-1]->getColorOfPiece() == "white" ){
             location.append(game->chessboardPtr->collection[row+1][col-1]);
             fieldSetting(location.last());
         }
-        if(col <7  && row<7 && game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == "Black"){
+        if(col <7  && row<7 && game->chessboardPtr->collection[row+1][col+1]->getColorOfPiece() == "white" ){
             location.append(game->chessboardPtr->collection[row+1][col+1]);
             fieldSetting(location.last());
         }
