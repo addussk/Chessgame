@@ -81,14 +81,15 @@ bool ChessPiece::fieldSetting(ChessField *field){
         King* ptr = dynamic_cast<King*>(location.last()->currentPiece);
 
         if(ptr){
-            field->setColor(Qt::blue);
+            field->setColor(Qt::green);
         }else{
-            field->setColor(Qt::red);
+            // gdy zbijamy bierke
+            field->setColor(Qt::yellow);
         }
         return true;
 
     }else{
-        location.last()->setColor(Qt::darkBlue);
+        location.last()->setColor(Qt::blue);
     }
     return false;
 }
@@ -623,7 +624,7 @@ void King::moves(){
     QString team = this->getSide();
 
     qDebug() << "Move function in King " << row << col;
-    qDebug() << game->chessboardPtr->collection[row-1][col]->getColorOfPiece() << team;
+
     // Up
     if(row>0 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {//up
         location.append(game->chessboardPtr->collection[row-1][col]);
