@@ -24,7 +24,7 @@ void ChessPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 
     // Pomijamy ruch gdy gracz probuje wybrac piona koloru ktoremu nie przypada ruch lub gdy wybiera puste pole
-    if( !this->getIsPlaced() || ((game->chessboardPtr->getTurn() != this->side) && (!game->chessboardPtr->pieceToMove)) ){
+    if( (!this->getIsPlaced()) || ((game->chessboardPtr->getTurn() != this->side) && (!game->chessboardPtr->pieceToMove)) ){
         qDebug()<< "ChessPiece::mousePressEvent: Nie twoja kolej, rusza przeciwnik!";
         return;
     }
@@ -297,7 +297,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkBlue);
+            location.last()->setColor(Qt::blue);
     }
 
     // Up Up Right
@@ -308,7 +308,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Down Down Left
@@ -319,7 +319,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Down Down Right
@@ -330,7 +330,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Left Left Up
@@ -341,7 +341,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Left Left Down
@@ -352,7 +352,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Rigt Right Up
@@ -363,7 +363,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 
     // Right Right Down
@@ -374,7 +374,7 @@ void Knight::moves(){
         if(location.last()->getHasChessPiece())
             location.last()->setColor(Qt::yellow);
         else
-            location.last()->setColor(Qt::darkRed);
+            location.last()->setColor(Qt::blue);
     }
 }
 
