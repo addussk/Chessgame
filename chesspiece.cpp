@@ -623,74 +623,74 @@ void King::moves(){
     QString team = this->getSide();
 
     qDebug() << "Move function in King " << row << col;
-
+    qDebug() << game->chessboardPtr->collection[row-1][col]->getColorOfPiece() << team;
     // Up
     if(row>0 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {//up
         location.append(game->chessboardPtr->collection[row-1][col]);
-        game->chessboardPtr->collection[row-1][col]->setColor(Qt::black);
+        game->chessboardPtr->collection[row-1][col]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Down
-    if(row<7 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {//down
+    if(row<7 && !(game->chessboardPtr->collection[row+1][col]->getColorOfPiece() == team)) {//down
         location.append(game->chessboardPtr->collection[row+1][col]);
-        game->chessboardPtr->collection[row+1][col]->setColor(Qt::black);
+        game->chessboardPtr->collection[row+1][col]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Left
-    if(col>0 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {// left
+    if(col>0 && !(game->chessboardPtr->collection[row][col-1]->getColorOfPiece() == team)) {// left
         location.append(game->chessboardPtr->collection[row][col-1]);
-        game->chessboardPtr->collection[row][col-1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row][col-1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Right
-    if(col<7 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {//right
+    if(col<7 && !(game->chessboardPtr->collection[row][col+1]->getColorOfPiece() == team)) {//right
         location.append(game->chessboardPtr->collection[row][col+1]);
-        game->chessboardPtr->collection[row][col+1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row][col+1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Up Left
-    if(col > 0 && row > 0 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {
+    if(col > 0 && row > 0 && !(game->chessboardPtr->collection[row-1][col-1]->getColorOfPiece() == team)) {
         location.append(game->chessboardPtr->collection[row-1][col-1]);
-        game->chessboardPtr->collection[row-1][col-1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row-1][col-1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Up Right
-    if(col < 7 && row > 0 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {
+    if(col < 7 && row > 0 && !(game->chessboardPtr->collection[row-1][col+1]->getColorOfPiece() == team)) {
         location.append(game->chessboardPtr->collection[row-1][col+1]);
-        game->chessboardPtr->collection[row-1][col+1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row-1][col+1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Down Left
-    if(col > 0 && row < 7  && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {
+    if(col > 0 && row < 7  && !(game->chessboardPtr->collection[row+1][col-1]->getColorOfPiece() == team)) {
         location.append(game->chessboardPtr->collection[row+1][col-1]);
-        game->chessboardPtr->collection[row+1][col-1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row+1][col-1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
     }
 
     // Down Right
-    if(col < 7 && row < 7 && !(game->chessboardPtr->collection[row-1][col]->getColorOfPiece() == team)) {
+    if(col < 7 && row < 7 && !(game->chessboardPtr->collection[row+1][col+1]->getColorOfPiece() == team)) {
         location.append(game->chessboardPtr->collection[row+1][col+1]);
-        game->chessboardPtr->collection[row+1][col+1]->setColor(Qt::black);
+        game->chessboardPtr->collection[row+1][col+1]->setColor(Qt::blue);
         if(location.last()->getHasChessPiece()){
             location.last()->setColor(Qt::yellow);
         }
