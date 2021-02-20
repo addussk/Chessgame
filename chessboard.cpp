@@ -1,6 +1,7 @@
 #include "chessboard.h"
 #include "ui_chessboard.h"
 #include "chesspiece.h"
+#include <QAbstractScrollArea>
 
 chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen ) :
     QMainWindow(parent),
@@ -8,30 +9,41 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
 {
     ui->setupUi(this);
 
-    // Dlugosc krawedzi poa
+    // Inicjalizacja dlugosci krawedzi 1 pola
     this->sizeField = edgeLen;
-    int tmp_edgeView = 8*edgeLen + 10;
 
-    // Rozdzielczosc main window
-    this->setFixedSize(w_Window,h_Window);
+    // Ustawienie na stale wymiarow okna
+    this->setFixedSize(w_Window, h_Window);
+
+    // Dodanie widoku do obiektu centralwidget
+    QGraphicsView* view = new QGraphicsView(ui->centralwidget);
+
+    // Dezaktywowanie scrollbarow
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Stworzenie sceny na ktorej zostanie umieszczona szachownica
-    boardScene = new QGraphicsScene(this);
+    this->boardScene = new QGraphicsScene(this);
+
+    // Ustawienie tla elementu graphics view
+    view->setBackgroundBrush(setColor(Qt::gray, Qt::SolidPattern));
+    // Ustawienie na stale wielkosci okna
+    view->setFixedSize(w_Window, h_Window);
 
     // Narysowanie pol na szachownicy
     drawBoard(edgeLen);
     
     placeOnBoard();
 
+    this->whitePiece = new QGraphicsTextItem();
+    this->blackPiece = new QGraphicsTextItem();
 
-    // Dodanie widoku do obiektu centralwidget
-    QGraphicsView* view = new QGraphicsView(ui->centralwidget);
+    this->addTextItem(this->whitePiece, QPoint(150,10),Qt::white, "WHITE PIECES", boardScene);
+    this->addTextItem(this->blackPiece, QPoint(1170,10),Qt::black, "BLACK PIECE", boardScene);
+
     // Umieszczenie na obiekcie view, obiekt grapgicsScene
     view->setScene(boardScene);
-    // Ustawienie polozenia obiektu, oraz wymiary(szerokosc, wysokosc)
-    view->setGeometry(QRect(100, 200, tmp_edgeView, tmp_edgeView));
-    // Ustawienie tla elementu graphics view
-    view->setBackgroundBrush(setColor(Qt::black, Qt::SolidPattern));
+
     // Wyswietlenie go w oknie
     view->show();
 }
@@ -39,6 +51,17 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
 chessboard::~chessboard()
 {
     delete ui;
+}
+
+void chessboard::addTextItem(QGraphicsTextItem* textItem, QPoint xy, QColor color, QString text, QGraphicsScene* pToScene){
+
+    textItem->setPos(xy);
+    textItem->setZValue(1);
+    textItem->setDefaultTextColor(color);
+    textItem->setFont(QFont("",18));
+    textItem->setPlainText(text);
+    pToScene->addItem(textItem);
+
 }
 
 QBrush chessboard::setColor(QColor color, QBrush brush){
@@ -135,7 +158,7 @@ void chessboard::drawBoard(int edgeLen){
             //Ustawienie pozycji kazdego pola
             field->rowLoc = r;
             field->colLoc = c;
-            field->setPos(SHIFT*c,SHIFT*r);
+            field->setPos(400+SHIFT*c,100+SHIFT*r);
 
             if( (c+r)%2 == 0 ){
                 field->setOrginalColor(Qt::lightGray);

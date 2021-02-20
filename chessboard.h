@@ -29,6 +29,7 @@ public:
     void setUpPieces(QString team);
     void placeOnBoard();
     void checkForCheck();
+    void addTextItem(QGraphicsTextItem* textItem, QPoint xy, QColor color, QString text, QGraphicsScene* pToScene);
 
     QString getTurn();
     void setTurn(QString);
@@ -39,11 +40,20 @@ public:
     // wskaznik na pionek ktory zostal zaznaczony
     ChessPiece* pieceToMove;
     //coordinates
-    ChessField *collection[8][8];
+    ChessField* collection[8][8];
+    //
+    QGraphicsTextItem *check;
 
 private:
-    Ui::chessboard *ui;
-    QGraphicsScene *boardScene;
+    Ui::chessboard* ui;
+    QGraphicsScene* boardScene;
+
+    QGraphicsTextItem* turnDisplay;
+    QGraphicsRectItem* deadHolder;
+
+    QGraphicsTextItem* whitePiece;
+    QGraphicsTextItem* blackPiece;
+
     int widthWindow;
     int hightWindow;
     QList <ChessPiece*> white;
