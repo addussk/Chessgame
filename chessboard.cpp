@@ -37,9 +37,11 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
 
     this->whitePiece = new QGraphicsTextItem();
     this->blackPiece = new QGraphicsTextItem();
+    this->turnDisplay = new QGraphicsTextItem();
 
     this->addTextItem(this->whitePiece, QPoint(150,10),Qt::white, "WHITE PIECES", boardScene);
     this->addTextItem(this->blackPiece, QPoint(1170,10),Qt::black, "BLACK PIECE", boardScene);
+    this->addTextItem(this->turnDisplay, QPoint(width()/2-100,10),Qt::white, "Turn : WHITE", boardScene);
 
     // Umieszczenie na obiekcie view, obiekt grapgicsScene
     view->setScene(boardScene);
@@ -114,6 +116,11 @@ QString chessboard::getTurn(){
 
 void chessboard::changeTurn(){
     turn = turn == "white" ? "black" : "white";
+    QColor color = turn == "white" ? Qt::white : Qt::black;
+
+    this->turnDisplay->setDefaultTextColor(color);
+
+    this->turnDisplay->setPlainText("Turn: " + getTurn().toUpper());
 }
 
 void chessboard::placeOnBoard(){
