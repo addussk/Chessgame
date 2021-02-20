@@ -32,6 +32,9 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
 
     // Narysowanie pol na szachownicy
     drawBoard(edgeLen);
+
+    addDeadHolder(QPoint(0,0), Qt::blue);
+    addDeadHolder(QPoint(940,0), Qt::blue);
     
     placeOnBoard();
 
@@ -39,8 +42,8 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
     this->blackPiece = new QGraphicsTextItem();
     this->turnDisplay = new QGraphicsTextItem();
 
-    this->addTextItem(this->whitePiece, QPoint(150,10),Qt::white, "WHITE PIECES", boardScene);
-    this->addTextItem(this->blackPiece, QPoint(1170,10),Qt::black, "BLACK PIECE", boardScene);
+    this->addTextItem(this->whitePiece, QPoint(80, 10),Qt::white, "WHITE PIECES", boardScene);
+    this->addTextItem(this->blackPiece, QPoint(1020, 10),Qt::black, "BLACK PIECE", boardScene);
     this->addTextItem(this->turnDisplay, QPoint(width()/2-100,10),Qt::white, "Turn : WHITE", boardScene);
 
     // Umieszczenie na obiekcie view, obiekt grapgicsScene
@@ -64,6 +67,16 @@ void chessboard::addTextItem(QGraphicsTextItem* textItem, QPoint xy, QColor colo
     textItem->setPlainText(text);
     pToScene->addItem(textItem);
 
+}
+
+void chessboard::addDeadHolder(QPoint xy, QColor color ){
+
+    deadHolder = new QGraphicsRectItem(xy.x(), xy.y(), 300, 800);
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(color);
+    deadHolder->setBrush(brush);
+    this->boardScene->addItem(deadHolder);
 }
 
 QBrush chessboard::setColor(QColor color, QBrush brush){
@@ -165,7 +178,7 @@ void chessboard::drawBoard(int edgeLen){
             //Ustawienie pozycji kazdego pola
             field->rowLoc = r;
             field->colLoc = c;
-            field->setPos(400+SHIFT*c,100+SHIFT*r);
+            field->setPos(300+SHIFT*c,100+SHIFT*r);
 
             if( (c+r)%2 == 0 ){
                 field->setOrginalColor(Qt::lightGray);
