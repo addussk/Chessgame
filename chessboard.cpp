@@ -95,7 +95,7 @@ void chessboard::displayDeadPiece(QString team){
                     k++;
                     j = 0;
                 }
-                whiteDeadPiece[i]->setPos(40+tmp_shift*j++,10+20*k);
+                whiteDeadPiece[i]->setPos(tmp_shift+ 40*j++,30+50*k);
         }
     }
     else if("black" == team)
@@ -105,7 +105,7 @@ void chessboard::displayDeadPiece(QString team){
                     k++;
                     j = 0;
                 }
-                blackDeadPiece[i]->setPos(40+tmp_shift*j++,10+20*k);
+                blackDeadPiece[i]->setPos(tmp_shift+40*j++,30+50*k);
         }
     }
     else{
