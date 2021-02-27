@@ -30,6 +30,9 @@ public:
     void placeOnBoard();
     void checkForCheck();
     void addTextItem(QGraphicsTextItem* textItem, QPoint xy, QColor color, QString text, QGraphicsScene* pToScene);
+    void addDeadHolder(QPoint xy, QColor col );
+    void placeInDeadPlace(ChessPiece* piece);
+    void displayDeadPiece(QString team);
 
     QString getTurn();
     void setTurn(QString);
@@ -41,15 +44,18 @@ public:
     ChessPiece* pieceToMove;
     //coordinates
     ChessField* collection[8][8];
-    //
-    QGraphicsTextItem *check;
+
+    QGraphicsTextItem* check;
 
 private:
     Ui::chessboard* ui;
     QGraphicsScene* boardScene;
+    QGraphicsView* view;
 
     QGraphicsTextItem* turnDisplay;
     QGraphicsRectItem* deadHolder;
+    QList <ChessPiece*> whiteDeadPiece;
+    QList <ChessPiece*> blackDeadPiece;
 
     QGraphicsTextItem* whitePiece;
     QGraphicsTextItem* blackPiece;

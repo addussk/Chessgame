@@ -41,10 +41,13 @@ chessboard::chessboard(QWidget *parent, int w_Window, int h_Window, int edgeLen 
     this->whitePiece = new QGraphicsTextItem();
     this->blackPiece = new QGraphicsTextItem();
     this->turnDisplay = new QGraphicsTextItem();
+    this->check = new QGraphicsTextItem();
 
     this->addTextItem(this->whitePiece, QPoint(80, 10),Qt::white, "WHITE PIECES", boardScene);
     this->addTextItem(this->blackPiece, QPoint(1020, 10),Qt::black, "BLACK PIECE", boardScene);
     this->addTextItem(this->turnDisplay, QPoint(width()/2-100,10),Qt::white, "Turn : WHITE", boardScene);
+    this->addTextItem(this->check, QPoint(520,780), Qt::red, "CHECK!", boardScene );
+    check->setVisible(false);
 
     // Umieszczenie na obiekcie view, obiekt grapgicsScene
     view->setScene(boardScene);
@@ -66,6 +69,48 @@ void chessboard::addTextItem(QGraphicsTextItem* textItem, QPoint xy, QColor colo
     textItem->setFont(QFont("",18));
     textItem->setPlainText(text);
     pToScene->addItem(textItem);
+
+}
+
+void chessboard::placeInDeadPlace(ChessPiece* piece){
+    if( "white" == piece->getSide()){
+        whiteDeadPiece.append(piece);
+        displayDeadPiece("white");
+    }
+    else{
+        blackDeadPiece.append(piece);
+        displayDeadPiece("black");
+    }
+}
+
+void chessboard::displayDeadPiece(QString team){
+    int tmp_shift = "white" == team ? 50 : 1000;
+    int j = 0;
+    int k = 0;
+
+    if("white" == team)
+    {
+        for(size_t i = 0,n = whiteDeadPiece.size(); i<n; i++) {
+                if(j == 4){
+                    k++;
+                    j = 0;
+                }
+                whiteDeadPiece[i]->setPos(40+tmp_shift*j++,10+20*k);
+        }
+    }
+    else if("black" == team)
+    {
+        for(size_t i = 0,n = blackDeadPiece.size(); i<n; i++) {
+                if(j == 4){
+                    k++;
+                    j = 0;
+                }
+                blackDeadPiece[i]->setPos(40+tmp_shift*j++,10+20*k);
+        }
+    }
+    else{
+        //do nothing
+    }
 
 }
 
@@ -106,10 +151,20 @@ void chessboard::setUpPieces(QString team){
     pVector->append(piece);
     piece = new Bishop(team);
     pVector->append(piece);
-    piece = new Queen(team);
-    pVector->append(piece);
-    piece = new King(team);
-    pVector->append(piece);
+
+    if(team == "white"){
+        piece = new Queen(team);
+        pVector->append(piece);
+        piece = new King(team);
+        pVector->append(piece);
+    }else if(team == "black"){
+        piece = new King(team);
+        pVector->append(piece);
+        piece = new Queen(team);
+        pVector->append(piece);
+
+    }
+
     piece = new Bishop(team);
     pVector->append(piece);
     piece = new Knight(team);
